@@ -49,7 +49,7 @@
                 if (document.cookie) {
                   // If the cookie is set, apply the saved choice.
                   handleChoice(null,
-                               document.cookie.replace(/^.*=(.*)$/), "$1");
+                               document.cookie.replace(/^.*=(.*)$/, "$1"));
                 } else {
                   // Otherwise, insert the warning.
                   document.body.insertAdjacentHTML("afterbegin", "<div style='border: 2px solid orange; box-shadow: 0 0 1em gold; padding: 10px; margin: 0; top: 0; left: 0; width: 95%; background: #fcf6d4; position: fixed;'><style scoped='scoped'>div { font-family: sans; } button { background: #ffd; }</style>Your browser does not seem to support MathML! You might want to download a <a href='https://www.mozilla.org/firefox/'>standard-compliant browser</a> or enable a fallback: <button>Ignore</button> <button>mathml.css</button> <button>MathJax.js</button></div>");
