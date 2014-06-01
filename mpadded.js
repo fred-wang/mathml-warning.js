@@ -40,7 +40,7 @@
         namespaceURI = "http://www.w3.org/1998/Math/MathML";
         if (document.body.getElementsByTagNameNS(namespaceURI, "math")[0]) {
             // Create a div to test mpadded, using Kuma's "offscreen" CSS
-            document.body.insertAdjacentHTML("afterbegin", "<div style='border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; z-index: 1000;'><math xmlns='" + namespaceURI + "'><mpadded height='23px' width='77px'></mpadded></math></div>");
+            document.body.insertAdjacentHTML("afterbegin", "<div style='border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; z-index: 2147483647;'><math xmlns='" + namespaceURI + "'><mpadded height='23px' width='77px'></mpadded></math></div>");
             div = document.body.firstChild;
             box = div.firstChild.firstChild.getBoundingClientRect();
             document.body.removeChild(div);

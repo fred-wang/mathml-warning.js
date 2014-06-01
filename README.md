@@ -1,5 +1,5 @@
-mathjax.js
-==========
+mathml-warning.js
+=================
 
 This repository contains some scripts to load
 <a href="http://fred-wang.github.io/mathml.css/mathml.css">mathml.css</a> or
