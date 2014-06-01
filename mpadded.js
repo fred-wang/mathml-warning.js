@@ -40,7 +40,7 @@
         namespaceURI = "http://www.w3.org/1998/Math/MathML";
         if (document.body.getElementsByTagNameNS(namespaceURI, "math")[0]) {
             // Create a div to test mpadded, using Kuma's "offscreen" CSS
-            document.body.insertAdjacentHTML("afterbegin", "<div style='border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; z-index: 2147483647;'><math xmlns='" + namespaceURI + "'><mpadded height='23px' width='77px'></mpadded></math></div>");
+            document.body.insertAdjacentHTML("afterbegin", "<div style='border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px;'><math xmlns='" + namespaceURI + "'><mpadded height='23px' width='77px'></mpadded></math></div>");
             div = document.body.firstChild;
             box = div.firstChild.firstChild.getBoundingClientRect();
             document.body.removeChild(div);
@@ -52,7 +52,7 @@
                                document.cookie.replace(/^.*=(.*)$/, "$1"));
                 } else {
                   // Otherwise, insert the warning.
-                  document.body.insertAdjacentHTML("afterbegin", "<div style='border: 2px solid orange; box-shadow: 0 0 1em gold; padding: 10px; margin: 0; top: 0; left: 0; width: 95%; background: #fcf6d4; position: fixed;'><style scoped='scoped'>div { font-family: sans; } button { background: #ffd; }</style>Your browser does not seem to have a good MathML support! You might want to download a <a href='https://www.mozilla.org/firefox/'>standard-compliant browser</a> or enable a fallback: <button>Ignore</button> <button>mathml.css</button> <button>MathJax.js</button></div>");
+                  document.body.insertAdjacentHTML("afterbegin", "<div style='border: 2px solid orange; box-shadow: 0 0 1em gold; padding: 10px; margin: 0; top: 0; left: 0; width: 95%; background: #fcf6d4; position: fixed; z-index: 2147483647;'><style scoped='scoped'>div { font-family: sans; } button { background: #ffd; }</style>Your browser does not seem to have a good MathML support! You might want to download a <a href='https://www.mozilla.org/firefox/'>standard-compliant browser</a> or enable a fallback: <button>Ignore</button> <button>mathml.css</button> <button>MathJax.js</button></div>");
                   div = document.body.firstChild;
                   for (button = div.getElementsByTagName("button")[0]; button;
                        button = button.nextElementSibling) {
