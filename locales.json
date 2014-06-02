@@ -19,5 +19,12 @@
     "none": "Ignorer",
     "css": "Appliquer mathml.css",
     "js": "Charger MathJax.js"
+  },
+  "pt": {
+    "dir": "ltr",
+    "warning": "Parece que seu navegador não possui um bom suporte ao MathML!",
+    "none": "Ignorar",
+    "css": "Aplicar mathml.css",
+    "js": "Carregar MathJax.js"
   }
 }
