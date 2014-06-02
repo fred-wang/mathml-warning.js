@@ -1,0 +1,16 @@
+{
+  "fr": {
+    "dir": "ltr",
+    "warning": "Votre navigateur ne semble pas disposer d'un bon support MathML!",
+    "none": "Ignorer",
+    "css": "Appliquer mathml.css",
+    "js": "Charger MathJax.js"
+  },
+  "es": {
+    "dir": "ltr",
+    "warning": "Su navegador no parece tener un buen soporte MathML!",
+    "none": "Ignorar",
+    "css": "Aplicar mathml.css",
+    "js": "Cargar MathJax.js"
+  }
+}

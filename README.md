@@ -1,22 +1,22 @@
 mathml-warning.js
 =================
 
-This repository contains some scripts to load
-<a href="http://fred-wang.github.io/mathml.css/mathml.css">mathml.css</a> or
-MathJax conditionally in order to
-use it as a MathML polyfill. This is done by performing MathML feature
-detections. You just need to insert one line in your document header:
+This repository contains scripts to display a warning for browsers that do not
+have good MathML support. This is done by performing MathML feature detection
+for the `<mpadded>` element (at the moment only implemented in Gecko browsers).
+The user may then ignore the warning or choose a polyfill. The choice will
+be saved during 30 days in the browser cookie.
+
+You just need to insert one line in your document header:
 
     <html>
       <head>
         ...
-        <script src="http://fred-wang.github.io/mathml-warning.js/mpadded.js"></script>
+        <script src="http://fred-wang.github.io/mathml-warning.js/mpadded-min.js"></script>
         ...
       </head>
       ...
     </html>
 
-This will display a warning for browsers that do not implement the `<mpadded>`
-element (at the moment all but Gecko browsers). The user may then ignore the
-warning or choose a polyfill. The choice is saved during 30 days in the browser
-cookie.
+The english strings are specified in the `mpadded.js` file. Edit the
+`locales.json` file if you wish to add more languages.

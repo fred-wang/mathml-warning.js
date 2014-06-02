@@ -1,3 +1,5 @@
+/* -*- Mode: Java; tab-width: 2; indent-tabs-mode:nil; c-basic-offset: 2 -*- */
+/* vim: set ts=2 et sw=2 tw=80: */
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -6,18 +8,73 @@
 "use strict";
 
 (function () {
+    var locales = {
+      "": {
+        "dir": "ltr",
+        "warning": "Your browser does not seem to have good MathML support!",
+        "none": "Ignore",
+        "css": "Apply mathml.css",
+        "js": "Load MathJax.js"
+      }
+    };
+
+    function initUI(aDiv, aFirstCall)
+    {
+      var el, language, req, json;
+
+      // Try and find a translation for the user language.
+      language = navigator.language || navigator.browserLanguage;
+      while (!locales.hasOwnProperty(language)) {
+        language = language.substr(0, language.lastIndexOf("-"));
+      }
+
+      // Set the direction of the div
+      aDiv.setAttribute("dir", locales[language].dir);
+
+      // Localize the warning message
+      el = aDiv.getElementsByTagName("span")[0];
+      el.textContent = locales[language].warning; el = el.nextElementSibling;
+
+      // Localize the buttons and register the click events.
+      while (el) {
+        el.textContent = locales[language][el.name];
+        if (aFirstCall) {
+          el.addEventListener("click", function (aEvent) {
+            handleChoice(aDiv, aEvent.target.name);
+          });
+        }
+        el = el.nextElementSibling;
+      }
+
+      if (aFirstCall) {
+        // Load the locales and update the UI.
+        req = new XMLHttpRequest();
+        req.overrideMimeType("application/json");  
+        req.open("GET", "locales.json", true);
+        req.onreadystatechange = function () {
+          if (req.readyState === 4 && req.status === 200) {
+            json = JSON.parse(req.responseText);
+            json[""] = locales[""];
+            locales = json;
+            initUI(aDiv, false);
+          }
+        }
+        req.send();
+      }
+    }
+
     function handleChoice(aDiv, aChoice)
     {
       var el;
       switch (aChoice) {
-        case "mathml.css":
+        case "css":
           // Insert the mathml.css stylesheet.
           el = document.createElement("link");
           el.href = "http://fred-wang.github.io/mathml.css/mathml.css";
           el.rel = "stylesheet";
           document.head.appendChild(el);
         break;
-        case "MathJax.js":
+        case "js":
           // Insert the MathJax.js script.
           el = document.createElement("script");
           el.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML";
@@ -44,7 +101,7 @@
             div = document.body.firstChild;
             box = div.firstChild.firstChild.getBoundingClientRect();
             document.body.removeChild(div);
-            if (Math.abs(box.height - 23) > 1  || Math.abs(box.width - 77) > 1) {
+            if (true || Math.abs(box.height - 23) > 1  || Math.abs(box.width - 77) > 1) {
                 // MathML does not seem to be supported...
                 if (document.cookie) {
                   // If the cookie is set, apply the saved choice.
@@ -52,14 +109,9 @@
                                document.cookie.replace(/^.*=(.*)$/, "$1"));
                 } else {
                   // Otherwise, insert the warning.
-                  document.body.insertAdjacentHTML("afterbegin", "<div style='border: 2px solid orange; box-shadow: 0 0 1em gold; padding: 10px; margin: 0; top: 0; left: 0; width: 95%; background: #fcf6d4; position: fixed; z-index: 2147483647;'><style scoped='scoped'>div { font-family: sans; } button { background: #ffd; }</style>Your browser does not seem to have a good MathML support! You might want to download a <a href='https://www.mozilla.org/firefox/'>standard-compliant browser</a> or enable a fallback: <button>Ignore</button> <button>mathml.css</button> <button>MathJax.js</button></div>");
+                  document.body.insertAdjacentHTML("afterbegin", "<div style='border: 2px solid orange; box-shadow: 0 0 1em gold; padding: 10px; margin: 0; top: 0; width: 95%; background: #fcf6d4; position: fixed; z-index: 2147483647;'><style scoped='scoped'>div { font-family: sans; } button { background: #ffd; }</style><span></span> <button name='none'></button><button name='css'></button> <button name='js'></button></div>");
                   div = document.body.firstChild;
-                  for (button = div.getElementsByTagName("button")[0]; button;
-                       button = button.nextElementSibling) {
-                    button.addEventListener("click", function (aEvent) {
-                      handleChoice(div, aEvent.target.textContent);
-                    });
-                  }
+                  initUI(div, true);
                 }
             }
         }
