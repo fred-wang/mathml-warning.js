@@ -101,7 +101,7 @@
             div = document.body.firstChild;
             box = div.firstChild.firstChild.getBoundingClientRect();
             document.body.removeChild(div);
-            if (true || Math.abs(box.height - 23) > 1  || Math.abs(box.width - 77) > 1) {
+            if (Math.abs(box.height - 23) > 1  || Math.abs(box.width - 77) > 1) {
                 // MathML does not seem to be supported...
                 if (document.cookie) {
                   // If the cookie is set, apply the saved choice.
