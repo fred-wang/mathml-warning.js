@@ -23,14 +23,14 @@
         case "css":
             // Insert the mathml.css stylesheet.
             el = document.createElement("link");
-            el.href = "http://fred-wang.github.io/mathml.css/mathml.css";
+            el.href = "https://fred-wang.github.io/mathml.css/mathml.css";
             el.rel = "stylesheet";
             document.head.appendChild(el);
             break;
         case "js":
             // Insert the MathJax.js script.
             el = document.createElement("script");
-            el.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML";
+            el.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML";
             document.head.appendChild(el);
             break;
         default:
